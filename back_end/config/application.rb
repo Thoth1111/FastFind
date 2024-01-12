@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module FastFind
   class Application < Rails::Application
+    # Initialize as an API-only Rails app
+    config.api_only = true
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
