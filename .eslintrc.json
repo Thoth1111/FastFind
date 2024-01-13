@@ -18,5 +18,12 @@
     "ignorePatterns": [
       "dist/",
       "build/"
-    ]
+    ],
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "paths": ["app/javascript"] // Adjust this path based on your project structure
+        }
+      }
+    }
   }
