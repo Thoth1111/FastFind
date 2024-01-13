@@ -5,16 +5,18 @@
     <h1 class="title_font">FastFinder</h1>
     
     <div class="search_field">
-        <%= form_tag( save_log_api_logs_path, method: "post", id: "search_form") do %>
-            <div class="flexed">
-                <%= text_field_tag(:query, nil, placeholder: "Search", id: "search_bar") %>
-                <%= image_submit_tag("search.svg", alt: "Search icon", class: "search_icon button") %>
-            </div>
+        <%= turbo_frame_tag "post" do %>
+            <%= form_tag( save_log_api_logs_path, method: "post", id: "search_form", data: { turbo_action: "replace" }) do %>
+                <div class="flexed">
+                    <%= text_field_tag(:query, nil, id: "search_bar", placeholder: "Search") %>
+                    <%= image_submit_tag("search.svg", alt: "Search icon", class: "search_icon button") %>
+                </div>
+            <% end %>
         <% end %>
     </div>
 
     <div class="matches_container">
-        <ul id="matches"></ul>
+        <ul class="matches"></ul>
     <div>
 </div>
 

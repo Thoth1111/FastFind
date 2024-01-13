@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_12_110210) do
   create_table "logs", force: :cascade do |t|
     t.inet "ip_address", null: false
     t.string "query", null: false
-    t.integer "count", default: 0
+    t.integer "count", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

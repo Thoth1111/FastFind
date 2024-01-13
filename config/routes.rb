@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   # Define my API routes
-  namespace :api, defaults: { format: 'json' } do
-    resources :logs, only: [] do
+  namespace :api do
+    resources :logs do
       collection do
-        post '/save_log', to: 'logs#save_log' 
-        get 'search_log', to: 'logs#search_log'
+        post :save_log
+        get :search_log
       end
     end
   end

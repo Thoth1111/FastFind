@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const searchInput = document.getElementById('search_bar');
-  const searchSubmit = document.getElementById('search_form');
-  const matchesList = document.getElementById('matches');
-  let timeout;
+  let searchInput = document.querySelector('#search_bar');
+  const searchSubmit = document.querySelector('#search_form');
+  const matchesList = document.querySelector('.matches');
 
   function updateMatches(matches) {
     for (const match of matches) {
@@ -13,19 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function searchQuery(query) {
-    fetch(process.env.ANALYTICS_URL, {
+    console.log('searchQuery function fired')
+    fetch(`${process.env.ANALYTICS_URL}?query=${query}`, {
       method: 'GET',
-      data: { query },
     })
-      .then((res) => {
-        updateMatches(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .then((res) => res.json())
+    .then(data => {
+        updateMatches(data);
+    })
+    .catch((err) => {
+        console.error(err);
+    });
   }
 
   function saveQuery(query) {
+    console.log('saveQuery function fired')
     fetch(process.env.SAVE_QUERY_URL, {
       method: 'POST',
       body: JSON.stringify({ query }),
@@ -33,19 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
         'Content-Type': 'application/json',
       },
     })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        searchQuery(query);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 
-  searchInput.addEventListener('input', () => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      searchQuery(searchInput.value);
-    }, 1000);
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value;
+    if (query !== '') searchQuery(query);
   });
 
   searchSubmit.addEventListener('submit', (e) => {

@@ -1,3 +1,3 @@
 class PageController < ApplicationController
-    #Logic and code handled by JavaScript
+  # Logic and code handled by JavaScript
 end
