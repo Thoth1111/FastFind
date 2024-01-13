@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     resources :logs, only: [] do
       collection do
-        get :index
-        post :save_log
-        get :search_log
+        post '/save_log', to: 'logs#save_log' 
+        get 'search_log', to: 'logs#search_log'
       end
     end
   end

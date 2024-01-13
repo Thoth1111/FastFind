@@ -1,16 +1,17 @@
 module Api
   class LogsController < ApplicationController
 
-    def index
-      @logs = Log.all
-      render json: { status_code: 200, data: @logs }
-    end
-    
     def save_log
       query = params[:query]
       ip_address = request.remote_ip
-
-      log = Log.search(query, ip_address)
+      #check if log exists and update count or create a new log
+      existing_log = Log.find_by(query: query, ip_address: ip_address)
+      if existing_log
+        existing_log.count += 1
+        existing_log.save
+      else
+        Log.create(query: query, ip_address: ip_address)
+      end
 
       render json: { status_code: 200, message: "Log created successfully"}
     end

@@ -7,13 +7,14 @@
     <div class="search_field">
         <%= form_tag( save_log_api_logs_path, method: "post", id: "search_form") do %>
             <div class="flexed">
-                <%= text_field_tag(:query, params[:query], placeholder: "Search", id: "search_bar") %>
+                <%= text_field_tag(:query, nil, placeholder: "Search", id: "search_bar") %>
                 <%= image_submit_tag("search.svg", alt: "Search icon", class: "search_icon button") %>
             </div>
         <% end %>
     </div>
 
-    <div class="results_container">
+    <div class="matches_container">
+        <ul id="matches"></ul>
     <div>
 </div>
 
