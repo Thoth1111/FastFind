@@ -10,20 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_12_111303) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_12_110210) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "analytics", force: :cascade do |t|
-    t.text "query", null: false
-    t.integer "count", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "logs", force: :cascade do |t|
-    t.text "ip_address", null: false
+    t.inet "ip_address", null: false
     t.string "query", null: false
+    t.integer "count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
